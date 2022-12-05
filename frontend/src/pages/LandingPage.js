@@ -34,14 +34,6 @@ const LandingPage = () => {
 
   const [errorMessage, setErrorMessage] = useState({ value: "" });
 
-  //Get user location
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      setLocationLatitude(pos.coords.latitude);
-      setLocationLongitude(pos.coords.longitude);
-    });
-  });
-
   //After submitting phone phoneNumber/logging google account
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -62,8 +54,10 @@ const LandingPage = () => {
           dispatch(fetchCurrentUser({ ...result.data }));
           console.log(result);
           if (result.data.status === "new request") {
+            localStorage.setItem("phoneNumber", phoneNumber);
             navigate("/dashboard");
           } else {
+            localStorage.setItem("userData", result.data);
             navigate("/history");
           }
           // console.log(result);

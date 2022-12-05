@@ -53,11 +53,11 @@ const LandingPage = () => {
         .then((result) => {
           dispatch(fetchCurrentUser({ ...result.data }));
           console.log(result);
+          localStorage.setItem("phoneNumber", phoneNumber);
           if (result.data.status === "new request") {
-            localStorage.setItem("phoneNumber", phoneNumber);
             navigate("/dashboard");
           } else {
-            localStorage.setItem("userData", result.data);
+            // localStorage.setItem("userData", result.data);
             navigate("/history");
           }
           // console.log(result);

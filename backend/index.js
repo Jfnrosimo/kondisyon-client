@@ -33,8 +33,8 @@ server.get('/', (request, response) => {
 })
 
 //Routes
-server.use('/api/V1/user', userRoute)
-server.use('/api/V1/usert', usertRoute)
+server.use('/api/v1/user', userRoute)
+server.use('/api/v1/usert', usertRoute)
 
 
 

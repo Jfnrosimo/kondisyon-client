@@ -37,6 +37,52 @@ router.post('/checkNumber', async ( request, response )=> {
     })
 })
 
+//check phoneNUmber if exist
+router.post('/checkNumberTemp', async ( request, response )=> {
+    User.findOne({
+        phoneNumber: request.body.phoneNumber,
+
+    }).then( result => {
+        console.log(result)
+        if (result === null ){
+                response.send({ 
+                    status: 'new request'
+                });
+            }else if (result.status === 'Safe now') {
+                response.send({ 
+                    status: 'new request'
+                });
+            }
+            else  {
+                response.send({ 
+                    status: 'display status',
+                
+                })
+            }
+    })
+});
+
+router.post('/userHistory', (request, response) => {
+    User.findOne({
+        phoneNumber: request.body.phoneNumber,
+    
+    }).then (result => {
+        console.log(result)
+        History.find({
+            user: result._id
+        }).then ( result => {
+            response.send({ 
+                status: result
+            
+            })
+        })
+    })
+})
+
+
+
+
+
 
 
 

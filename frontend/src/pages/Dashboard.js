@@ -7,10 +7,13 @@ import axios from "axios";
 import { fetchCurrentUser } from "../redux/reducers/usersSlice";
 
 //Import routing
-import { useNavigate, Link, useResolvedPath } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //Import UI
 import { Button } from "reactstrap";
+import Waiting from "../assets/waiting.png";
+import Ambulance from "../assets/ambulance.png";
+import Safe from "../assets/safe.png";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -19,7 +22,6 @@ const Dashboard = () => {
 
   const [fetch, setFetch] = useState(false);
   const user = useSelector((data) => data);
-  console.log(user.data);
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [locationLatitude, setLocationLatitude] = useState("");
@@ -45,6 +47,7 @@ const Dashboard = () => {
         .then((result) => {
           dispatch(fetchCurrentUser({ ...result.data }));
           console.log(result);
+          navigate("/history");
         });
     } catch (error) {
       console.log(error);
@@ -67,6 +70,20 @@ const Dashboard = () => {
       <div>
         <Button onClick={onClickHelp}>I need HELP</Button>
         <Button onClick={onClickSafe}>I am SAFE</Button>
+      </div>
+      <div className="status-container">
+        <h2>STATUS LEGEND</h2>
+        <ul>
+          <li>
+            <img src={Waiting} /> Waiting for a response
+          </li>
+          <li>
+            <img src={Ambulance} /> Responder on the way
+          </li>
+          <li>
+            <img src={Safe} /> Safe now
+          </li>
+        </ul>
       </div>
     </div>
   );

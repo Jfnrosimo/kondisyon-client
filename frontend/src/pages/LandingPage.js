@@ -7,22 +7,21 @@ import axios from "axios";
 import { fetchCurrentUser } from "../redux/reducers/usersSlice";
 
 //Import routing
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-//Reactstrap components
+//Import UI
 import {
   Button,
-  Card,
-  CardBody,
+  Label,
   FormGroup,
   Form,
   Input,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  Row,
-  Col,
 } from "reactstrap";
+import "./LandingPage.css";
+import { FaPhoneAlt } from "react-icons/fa";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -76,36 +75,42 @@ const LandingPage = () => {
   };
 
   return (
-    <div lg="5" md="7">
+    <div className="landing-page-container" lg="5" md="7">
       <h1 className="text-center">Kondisyon</h1>
-      <Card className="shadow border-0 w-50 align-content-center">
-        <CardBody className="px-lg-5 py-lg-5">
-          <Form onSubmit={onSubmitHandler}>
-            <FormGroup className="mb-3">
-              <InputGroup className="input-group-alternative">
-                <InputGroupText addontype="prepend">
-                  <i className="ni ni-email-83" />
-                </InputGroupText>
-                <Input
-                  placeholder="09xxxxxxxxx"
-                  type="text"
-                  autoComplete="new-phoneNumber"
-                  value={phoneNumber}
-                  onChange={(e) => setphoneNumber(e.target.value)}
-                  minLength={11}
-                  maxLength={11}
-                />
-              </InputGroup>
-            </FormGroup>
-            <Button className="my-4" color="primary" type="submit">
-              Proceed
-            </Button>
-          </Form>
-          {errorMessage.value && (
-            <p className="text-danger"> {errorMessage.value} </p>
-          )}
-        </CardBody>
-      </Card>
+      <p className="text-light text-center">
+        May we ask for you to calm down. We will definitely send help the
+        soonest.
+      </p>
+      <Form onSubmit={onSubmitHandler}>
+        <FormGroup className="mb-3">
+          <Label for="phoneNumber">Enter your phone number</Label>
+          <InputGroup className="input-group-alternative">
+            <InputGroupText addontype="prepend">
+              <FaPhoneAlt />
+            </InputGroupText>
+            <Input
+              id="phoneNumber"
+              placeholder="09xxxxxxxxx"
+              type="text"
+              autoComplete="new-phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => setphoneNumber(e.target.value)}
+              minLength={11}
+              maxLength={11}
+            />
+          </InputGroup>
+        </FormGroup>
+        {errorMessage.value && (
+          <p className="text-danger"> {errorMessage.value} </p>
+        )}
+        <Button className="proceed-button my-4" type="submit">
+          Proceed
+        </Button>
+      </Form>
+      <small>
+        By signing in you agree to our{" "}
+        <Link to="/privacy-policy">Terms of Service and Privacy Policy.</Link>
+      </small>
     </div>
   );
 };

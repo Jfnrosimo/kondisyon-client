@@ -78,7 +78,6 @@ router.post('/userHistory', (request, response) => {
                 userHistory: result,
                 userDetails: userData
 
-            
             })
         })
     })

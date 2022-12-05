@@ -5,12 +5,10 @@ const HistorySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
    },
-   location : {
-        longitude: String,
-        latitude : String
-   }
+   locationLongitude: String,
+   locationLatitude: String 
    
 
 });
 
-module.exports = mongoose.model('History', UserSchema);
+module.exports = mongoose.model('History', HistorySchema);

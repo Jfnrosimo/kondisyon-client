@@ -5,10 +5,9 @@ const UserSchema = new mongoose.Schema({
     phoneNumber: String,
     status: String,
     statusDesc: String,
-    location: {
-        longitude: String,
-        latitude : String
-    }
+    locationLongitude: String,
+    locationLatitude: String 
+    
 
 });
 

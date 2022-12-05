@@ -31,7 +31,7 @@ router.post('/checkNumber', async ( request, response )=> {
 
 
 //Register User
-router.post('/NewKodisyon', async( request, response) => {
+router.post('/NewKondisyon', async( request, response) => {
    
     User.findOne({
         phoneNumber: request.body.phoneNumber,

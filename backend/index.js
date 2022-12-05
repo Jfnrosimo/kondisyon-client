@@ -20,7 +20,8 @@ server.use( helmet() );
 
 
 //routes
-const userRoute = require('./routes/user')
+const userRoute = require('./routes/user');
+const usertRoute = require('./routes/usert');
 
 // Database connection
 mongoose.connect('mongodb+srv://kondisyon:kondisyon@cluster0.zjj0pac.mongodb.net/kondisyondb')
@@ -33,6 +34,8 @@ server.get('/', (request, response) => {
 
 //Routes
 server.use('/api/V1/user', userRoute)
+server.use('/api/V1/usert', usertRoute)
+
 
 
 server.listen(

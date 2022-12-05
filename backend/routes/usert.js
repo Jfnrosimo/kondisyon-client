@@ -38,6 +38,8 @@ router.post('/checkNumber', async ( request, response )=> {
 })
 
 
+
+
 //Register User
 router.post('/NewKondisyon', async( request, response) => {
    
@@ -96,6 +98,58 @@ router.post('/NewKondisyon', async( request, response) => {
 
 })
 
+router.post('/imSafe', async ( request, response ) => {
+    User.findOne({
+        phoneNumber: request.body.phoneNumber,
+    }).then (result => {
+        if (result === null ){
+            const newUser = new User ({
+                ...request.body,
+                    status: 'Safe now',
+                    statusDesc: 'Safe now'
+            });
+
+             //add new user
+             newUser.save().then( result => {
+                response.send({ 
+                    status: 'Request Sent'
+                });
+            });
+        }else {
+
+            // console.log(result.user)
+            //add to history first then update current users status and location
+            const newHistory = new History({
+                user: result._id,
+                locationLongitude: result.locationLongitude,
+                locationLatitude: result.locationLatitude
+        
+            });
+            newHistory.save().then( result => {
+                console.log(result.user)
+                User.updateOne(
+         
+                    { phoneNumber: request.body.phoneNumber}, 
+                    { $set: { 
+                        locationLongitude: request.body.locationLongitude,
+                        locationLatitude: request.body.locationLatitude,
+                        status: 'Safe now',
+                        statusDesc: 'Safe now'
+                    } })
+                .then( result => {
+                    if( result.modifiedCount === 1 ){
+                        response.send({ status: "Request sent" });
+                    }
+                });
+
+            })
+           
+        
+               
+
+        }
+    })
+});
 
 
     // const newUser = new User(request.body);

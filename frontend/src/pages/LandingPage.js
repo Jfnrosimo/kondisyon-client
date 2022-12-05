@@ -46,6 +46,8 @@ const LandingPage = () => {
   //After submitting phone phoneNumber/logging google account
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    // console.log("hello");
+    console.log(locationLongitude);
 
     if (phoneNumber === "") {
       return setErrorMessage((prevState) => ({
@@ -54,14 +56,16 @@ const LandingPage = () => {
     }
     try {
       axios
-        .post("http://localhost:8080/api/v1/users", {
+        .post("http://localhost:8099/api/V1/user/checkNumber", {
           phoneNumber: phoneNumber,
-          locationLatitude: locationLatitude,
           locationLongitude: locationLongitude,
+          locationLatitude: locationLatitude,
         })
         .then((result) => {
-          dispatch(fetchCurrentUser({ ...result.data.user }));
-          localStorage.setItem("userId", result.data.userId);
+          dispatch(fetchCurrentUser({ ...result.data }));
+          console.log(result.data);
+          console.log(result.data.locationLongitude);
+          localStorage.setItem("userId", result.data);
           navigate("/dashboard");
         });
     } catch (error) {
@@ -79,7 +83,7 @@ const LandingPage = () => {
           <Form onSubmit={onSubmitHandler}>
             <FormGroup className="mb-3">
               <InputGroup className="input-group-alternative">
-                <InputGroupText addonType="prepend">
+                <InputGroupText addontype="prepend">
                   <i className="ni ni-email-83" />
                 </InputGroupText>
                 <Input
@@ -93,10 +97,10 @@ const LandingPage = () => {
                 />
               </InputGroup>
             </FormGroup>
+            <Button className="my-4" color="primary" type="submit">
+              Proceed
+            </Button>
           </Form>
-          <Button className="my-4" color="primary" type="submit">
-            Proceed
-          </Button>
           {errorMessage.value && (
             <p className="text-danger"> {errorMessage.value} </p>
           )}

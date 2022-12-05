@@ -10,7 +10,7 @@ export const usersSlice = createSlice({
   reducers: {
     newUser: (state, action) => {
       axios
-        .post("http://localhost:8080/api/v1/auth/register", {
+        .post("http://localhost:8099/api/V1/user/checkNumber", {
           ...action.payload.users,
         })
         .then((result) => {

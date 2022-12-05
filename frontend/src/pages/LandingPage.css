@@ -1,0 +1,12 @@
+.landing-page-container{
+  background: #78B7B6;
+  height: 100vh;
+}
+
+form .proceed-button{
+  background: #257A84;
+}
+
+form .proceed-button:hover{
+  border: 1px solid #257A84;
+}

@@ -62,17 +62,22 @@ router.post('/checkNumberTemp', async ( request, response )=> {
     })
 });
 
+//display history
 router.post('/userHistory', (request, response) => {
+     
     User.findOne({
         phoneNumber: request.body.phoneNumber,
     
     }).then (result => {
         console.log(result)
+        const userData = result
         History.find({
             user: result._id
         }).then ( result => {
             response.send({ 
-                status: result
+                userHistory: result,
+                userDetails: userData
+
             
             })
         })

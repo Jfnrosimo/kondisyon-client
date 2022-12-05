@@ -21,9 +21,17 @@ router.post('/checkNumber', async ( request, response )=> {
                 });
             }
             else  {
-                response.send({ 
-                    status: 'display status'
-                });
+                const userDetails = result;
+                History.find({
+                    user: userDetails._id
+                }).then( result => {
+                    response.send({ 
+                        status: 'display status',
+                        userDetails : userDetails,
+                        userHistory : result
+                    });
+                })
+                
             }
         
     })

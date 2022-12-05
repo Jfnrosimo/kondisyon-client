@@ -84,7 +84,8 @@ router.post('/userHistory', (request, response) => {
             })
         } else {
             response.send({
-                result: false
+                result: 'false',
+                userDetails: userData,
             })
         }
 

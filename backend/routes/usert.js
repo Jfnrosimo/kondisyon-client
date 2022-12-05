@@ -71,15 +71,24 @@ router.post('/userHistory', (request, response) => {
     }).then (result => {
         console.log(result)
         const userData = result
-        History.find({
-            user: result._id
-        }).then ( result => {
-            response.send({ 
-                userHistory: result,
-                userDetails: userData
-
+        if (result !== null){
+            History.find({
+                user: result._id
+            }).then ( result => {
+                response.send({ 
+                    userHistory: result,
+                    userDetails: userData,
+                    result: true
+    
+                })
             })
-        })
+        } else {
+            response.send({
+                result: false
+            })
+        }
+
+        
     })
 })
 
@@ -103,7 +112,8 @@ router.post('/NewKondisyon', async( request, response) => {
             const newUser = new User({
                 ...request.body,
                     status: 'Waiting for a Responder',
-                    statusDesc: 'Responder will call you in a few minutes!'
+                    statusDesc: 'Responder will call you in a few minutes!',
+                    lastUpdate: Date.now()
             });
             //add new user
             newUser.save().then( result => {
@@ -117,7 +127,8 @@ router.post('/NewKondisyon', async( request, response) => {
             const newHistory = new History({
                 user: result._id,
                 locationLongitude: result.locationLongitude,
-                locationLatitude: result.locationLatitude
+                locationLatitude: result.locationLatitude,
+                dateUpdated: result.lastUpdate
         
             });
 
@@ -130,7 +141,8 @@ router.post('/NewKondisyon', async( request, response) => {
                         locationLongitude: request.body.locationLongitude,
                         locationLatitude: request.body.locationLatitude,
                         status: 'Waiting for a Responder',
-                        statusDesc: 'Responder will call you in a few minutes!'
+                        statusDesc: 'Responder will call you in a few minutes!',
+                        lastUpdate: Date.now()
                     } })
                 .then( result => {
                     if( result.modifiedCount === 1 ){
@@ -148,6 +160,7 @@ router.post('/NewKondisyon', async( request, response) => {
 
 })
 
+//im safe button
 router.post('/imSafe', async ( request, response ) => {
     User.findOne({
         phoneNumber: request.body.phoneNumber,
@@ -172,7 +185,8 @@ router.post('/imSafe', async ( request, response ) => {
             const newHistory = new History({
                 user: result._id,
                 locationLongitude: result.locationLongitude,
-                locationLatitude: result.locationLatitude
+                locationLatitude: result.locationLatitude,
+                dateUpdated: result.lastUpdate
         
             });
             newHistory.save().then( result => {
@@ -184,7 +198,9 @@ router.post('/imSafe', async ( request, response ) => {
                         locationLongitude: request.body.locationLongitude,
                         locationLatitude: request.body.locationLatitude,
                         status: 'Safe now',
-                        statusDesc: 'Safe now'
+                        statusDesc: 'Safe now',
+                        lastUpdate: Date.now()
+                        
                     } })
                 .then( result => {
                     if( result.modifiedCount === 1 ){

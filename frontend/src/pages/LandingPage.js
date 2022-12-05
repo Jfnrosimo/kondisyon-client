@@ -1,5 +1,5 @@
 //Import hook
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -30,7 +30,18 @@ const LandingPage = () => {
 
   //create states
   const [phoneNumber, setphoneNumber] = useState("");
+  const [locationLatitude, setLocationLatitude] = useState("");
+  const [locationLongitude, setLocationLongitude] = useState("");
+
   const [errorMessage, setErrorMessage] = useState({ value: "" });
+
+  //Get user location
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setLocationLatitude(pos.coords.latitude);
+      setLocationLongitude(pos.coords.longitude);
+    });
+  });
 
   //After submitting phone phoneNumber/logging google account
   const onSubmitHandler = (e) => {
@@ -45,6 +56,8 @@ const LandingPage = () => {
       axios
         .post("http://localhost:8080/api/v1/users", {
           phoneNumber: phoneNumber,
+          locationLatitude: locationLatitude,
+          locationLongitude: locationLongitude,
         })
         .then((result) => {
           dispatch(fetchCurrentUser({ ...result.data.user }));
@@ -59,17 +72,18 @@ const LandingPage = () => {
   };
 
   return (
-    <Col lg="5" md="7">
-      <Card className="shadow border-0">
+    <div lg="5" md="7">
+      <h1 className="text-center">Kondisyon</h1>
+      <Card className="shadow border-0 w-50 align-content-center">
         <CardBody className="px-lg-5 py-lg-5">
-          <Form>
+          <Form onSubmit={onSubmitHandler}>
             <FormGroup className="mb-3">
               <InputGroup className="input-group-alternative">
                 <InputGroupText addonType="prepend">
                   <i className="ni ni-email-83" />
                 </InputGroupText>
                 <Input
-                  placeholder="Phone number"
+                  placeholder="09xxxxxxxxx"
                   type="text"
                   autoComplete="new-phoneNumber"
                   value={phoneNumber}
@@ -88,7 +102,7 @@ const LandingPage = () => {
           )}
         </CardBody>
       </Card>
-    </Col>
+    </div>
   );
 };
 

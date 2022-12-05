@@ -45,8 +45,6 @@ const LandingPage = () => {
   //After submitting phone phoneNumber/logging google account
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    // console.log("hello");
-    console.log(locationLongitude);
 
     if (phoneNumber === "") {
       return setErrorMessage((prevState) => ({
@@ -55,17 +53,22 @@ const LandingPage = () => {
     }
     try {
       axios
-        .post("http://localhost:8099/api/V1/user/checkNumber", {
+        .post("http://localhost:8099/api/V1/usert/checkNumber", {
           phoneNumber: phoneNumber,
           locationLongitude: locationLongitude,
           locationLatitude: locationLatitude,
         })
         .then((result) => {
           dispatch(fetchCurrentUser({ ...result.data }));
-          console.log(result.data);
-          console.log(result.data.locationLongitude);
-          localStorage.setItem("userId", result.data);
-          navigate("/dashboard");
+          console.log(result);
+          if (result.data.status === "new request") {
+            navigate("/dashboard");
+          } else {
+            navigate("/history");
+          }
+          // console.log(result);
+          // console.log(result.data.locationLongitude);
+          // localStorage.setItem("userId", result.data);
         });
     } catch (error) {
       setErrorMessage((prevState) => ({

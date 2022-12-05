@@ -118,9 +118,22 @@ router.post('/NewKondisyon', async( request, response) => {
             });
             //add new user
             newUser.save().then( result => {
-                response.send({ 
-                    status: 'Request Sent'
+                
+                const newHistory = new History({
+                    user: result._id,
+                    locationLongitude: result.locationLongitude,
+                    locationLatitude: result.locationLatitude,
+                    dateUpdated: result.lastUpdate
+            
                 });
+
+                newHistory.save().then( result =>{
+                    response.send({ 
+                        status: 'Request Sent'
+                    });
+                })
+
+                
             });
             
         }else{

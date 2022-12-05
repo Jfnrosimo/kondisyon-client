@@ -78,10 +78,7 @@ router.post('/checkNumber', async ( request, response ) => {
 
 
 
-                        
-
-                    
-
+                
                 }else{
                     // ididisplay yung status nya, yung status description 
                     response.send({

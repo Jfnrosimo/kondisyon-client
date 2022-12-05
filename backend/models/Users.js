@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
     status: String,
     statusDesc: String,
     locationLongitude: String,
-    locationLatitude: String 
+    locationLatitude: String,
+    lastUpdate: Date,
     
 
 });

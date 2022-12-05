@@ -6,7 +6,8 @@ const HistorySchema = new mongoose.Schema({
         ref: 'User'
    },
    locationLongitude: String,
-   locationLatitude: String 
+   locationLatitude: String,
+   dateUpdated: Date 
    
 
 });

@@ -22,7 +22,7 @@ export const usersSlice = createSlice({
     },
     updateUser: (state, action) => {
       axios
-        .patch(`http://localhost:8080/api/v1/users/${action.payload.id}`, {
+        .post(`http://localhost:8099/api/v1/admin/changeStatus`, {
           ...action.payload.users,
         })
         .then((result) => {
@@ -46,7 +46,8 @@ export const usersSlice = createSlice({
     },
     fetchUsers: (state, action) => {
       state.users = [];
-      state.users = action.payload.users;
+      state.users = action.payload;
+      // state.users = { userData: state.users };
     },
     fetchCurrentUser: (state, action) => {
       state.users = [];

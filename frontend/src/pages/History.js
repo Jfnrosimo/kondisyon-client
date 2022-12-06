@@ -29,13 +29,21 @@ const History = () => {
         console.log(result);
         dispatch(fetchCurrentUser({ ...result.data }));
       });
-  }, []);
+  }, [dispatch]);
+
   //Get current user details
   const phoneNumber = localStorage.getItem("phoneNumber");
-  console.log(phoneNumber);
   const status = state.userDetails.status;
   const statusDesc = state.userDetails.statusDesc;
   const userHistory = state.userHistory;
+
+  // if (state.status === "Request sent") {
+  //   status = state.result.status;
+  //   statusDesc = state.userDetails.statusDesc;
+  //   userHistory = state.userHistory;
+  // } else {
+  //   status = state.user
+  // }
 
   return (
     <div className="history-page-container">

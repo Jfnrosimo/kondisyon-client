@@ -162,6 +162,7 @@ router.post("/imSafe", async (request, response) => {
         ...request.body,
         status: "Safe now",
         statusDesc: "Safe now",
+        lastUpdate: Date.now(),
       });
 
       //add new user

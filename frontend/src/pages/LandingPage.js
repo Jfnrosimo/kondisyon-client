@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import Logo from "../assets/kondisyon_final2.png";
 
 //Import redux
 import { fetchCurrentUser } from "../redux/reducers/usersSlice";
@@ -72,9 +73,13 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="landing-page-container d-flex flex-column" lg="5" md="7">
-      <h1 className="text-center">Kondisyon</h1>
-      <p className="text-light text-center mt-5">
+    <div className="landing-page-container d-flex flex-column justify-content-center" >
+
+      <div className="kondisyon-logo d-flex justify-content-center">
+        <a href="./">
+        <img src={Logo} alt="logo" /> </a>
+      </div>
+      <p className="text-light text-top text-center mt-5">
         May we ask for you to calm down. We will definitely send help the
         soonest.
       </p>

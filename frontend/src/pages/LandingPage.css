@@ -1,6 +1,10 @@
 .landing-page-container{
   background: #78B7B6;
   height: 100vh;
+  /* background-image: url(https://wallpaperaccess.com/full/1947484.jpg);
+    background-position: center;
+    background-size: cover; */
+
 }
 
 form .proceed-button{
@@ -12,4 +16,33 @@ form .proceed-button{
 
 form .proceed-button:hover{
   border: 1px solid #257A84;
+}
+
+
+@media screen and (max-width: 480px) {
+   .kondisyon-logo  {
+    margin: 0;
+     transform: scale(0.55);
+    padding: 0;
+  }
+}
+
+  /* .justify-content-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    } */
+
+@media screen and (max-width: 820px) {
+  .landing-page-container  {
+   margin: 0;
+   display: flex;
+   justify-content: flex-start;
+
+   /* height: 100; */
+  /* transform: scale(.7); */
+   padding: 0;
+  
+
+ }
 }

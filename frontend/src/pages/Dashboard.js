@@ -59,13 +59,15 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <p className="text-center fs-5">
+      
+      <p className="text-center fs-5" phone-number>
         Your phone number is: {localStorage.getItem("phoneNumber")}
       </p>
       <div className="d-flex flex-column align-items-center">
         <h2 className="notify-container border border-solid border-white rounded text-center p-2 text-light w-75">
           Notify Responders
         </h2>
+
         <p className=" text-center">Let us know about your situation.</p>
         <div>
           <Button

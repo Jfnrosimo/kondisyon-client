@@ -1,6 +1,10 @@
-.dashboard-container{
+* {
   background: #78B7B6;
+  
+}
+.dashboard-container{
   height: 100vh;
+  margin-top: 2rem;
 }
 
 .notify-container{
@@ -25,3 +29,10 @@ div .safe-btn:hover {
   background: rgb(4, 120, 18);
   color: #f2f2f2;
 }
+
+/* @media screen and (max-width: 480px) {
+  .dashboard-container {
+    
+  }
+  
+} */

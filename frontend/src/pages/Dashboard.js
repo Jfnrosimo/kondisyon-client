@@ -10,7 +10,8 @@ import { fetchCurrentUser } from "../redux/reducers/usersSlice";
 import { useNavigate } from "react-router-dom";
 
 //Import UI
-import { Button } from "reactstrap";
+// import { Button } from "reactstrap";
+import { Button, Modal } from "react-bootstrap";
 import Waiting from "../assets/waiting.png";
 import Ambulance from "../assets/ambulance.png";
 import Safe from "../assets/safe.png";
@@ -20,10 +21,12 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [fetch, setFetch] = useState(false);
-  const user = useSelector((data) => data);
+  //Create popup modal after mark as safe
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
-  const [phoneNumber, setPhoneNumber] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
   const [locationLatitude, setLocationLatitude] = useState("");
   const [locationLongitude, setLocationLongitude] = useState("");
 
@@ -33,7 +36,7 @@ const Dashboard = () => {
       setLocationLatitude(pos.coords.latitude);
       setLocationLongitude(pos.coords.longitude);
     });
-  }, []);
+  }, [dispatch]);
 
   //On clik help button
   const onClickHelp = () => {
@@ -55,7 +58,24 @@ const Dashboard = () => {
   };
 
   //On click safe button
-  const onClickSafe = () => {};
+  const onClickSafe = () => {
+    try {
+      axios
+        .post("http://localhost:8099/api/v1/usert/imSafe", {
+          phoneNumber: localStorage.getItem("phoneNumber"),
+          locationLongitude: locationLongitude,
+          locationLatitude: locationLatitude,
+        })
+        .then((result) => {
+          dispatch(fetchCurrentUser({ ...result.data }));
+          // console.log(result);
+          // navigate("/history");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    setShow(true);
+  };
 
   return (
     <div className="dashboard-container">
@@ -77,6 +97,23 @@ const Dashboard = () => {
           <Button className="safe-btn mx-3 p-3" onClick={onClickSafe}>
             I am SAFE
           </Button>
+          {/*------------------ Popup modal ------------------*/}
+          <Modal show={show} onHide={handleClose} centered="true">
+            <Modal.Header closeButton>
+              <Modal.Title>Its good to hear from you</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <img className="w-10" src={Safe} /> You have marked yourself safe.
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              {/* <Button variant="primary" onClick={handleClose}>
+                Save Changes
+              </Button> */}
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
       <div className="status-container mt-5">

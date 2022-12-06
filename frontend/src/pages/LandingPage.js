@@ -72,14 +72,17 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="landing-page-container" lg="5" md="7">
+    <div className="landing-page-container d-flex flex-column" lg="5" md="7">
       <h1 className="text-center">Kondisyon</h1>
-      <p className="text-light text-center">
+      <p className="text-light text-center mt-5">
         May we ask for you to calm down. We will definitely send help the
         soonest.
       </p>
-      <Form onSubmit={onSubmitHandler}>
-        <FormGroup className="mb-3">
+      <Form
+        onSubmit={onSubmitHandler}
+        className="d-flex justify-content-center flex-column align-items-center"
+      >
+        <FormGroup className="mb-3 d-flex justify-content-center flex-column align-items-center">
           <Label for="phoneNumber">Enter your phone number</Label>
           <InputGroup className="input-group-alternative">
             <InputGroupText addontype="prepend">
@@ -88,7 +91,7 @@ const LandingPage = () => {
             <Input
               id="phoneNumber"
               placeholder="09xxxxxxxxx"
-              type="text"
+              type="tel"
               autoComplete="new-phoneNumber"
               value={phoneNumber}
               onChange={(e) => setphoneNumber(e.target.value)}
@@ -104,7 +107,7 @@ const LandingPage = () => {
           Proceed
         </Button>
       </Form>
-      <small>
+      <small className="text-center w-75 align-self-center">
         By signing in you agree to our{" "}
         <Link to="/privacy-policy">Terms of Service and Privacy Policy.</Link>
       </small>

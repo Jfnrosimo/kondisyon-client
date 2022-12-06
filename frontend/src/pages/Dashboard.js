@@ -59,21 +59,29 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <h1>Dashboard</h1>
       <p className="text-center fs-5">
         Your phone number is: {localStorage.getItem("phoneNumber")}
       </p>
-      <p className=" text-center">Let us know about your situation.</p>
-      <h2 className="border border-solid border-white rounded w-75">
-        Notify Responders
-      </h2>
-      <div>
-        <Button onClick={onClickHelp}>I need HELP</Button>
-        <Button onClick={onClickSafe}>I am SAFE</Button>
+      <div className="d-flex flex-column align-items-center">
+        <h2 className="notify-container border border-solid border-white rounded text-center p-2 text-light w-75">
+          Notify Responders
+        </h2>
+        <p className=" text-center">Let us know about your situation.</p>
+        <div>
+          <Button
+            className="help-btn mx-3 p-3 text-light"
+            onClick={onClickHelp}
+          >
+            I need HELP
+          </Button>
+          <Button className="safe-btn mx-3 p-3" onClick={onClickSafe}>
+            I am SAFE
+          </Button>
+        </div>
       </div>
-      <div className="status-container">
-        <h2>STATUS LEGEND</h2>
-        <ul>
+      <div className="status-container mt-5">
+        <h2 className="text-center">STATUS LEGEND</h2>
+        <ul className="list-unstyled text-center">
           <li>
             <img src={Waiting} /> Waiting for a response
           </li>

@@ -118,6 +118,7 @@ router.post('/NewKondisyon', async( request, response) => {
             });
             //add new user
             newUser.save().then( result => {
+                const userDetail = result;
                 
                 const newHistory = new History({
                     user: result._id,
@@ -128,10 +129,20 @@ router.post('/NewKondisyon', async( request, response) => {
                 });
 
                 newHistory.save().then( result =>{
-                    response.send({ 
-                        status: 'Request Sent',
-                        result: result
-                    });
+                    console.log(result)
+
+                    History.find({
+                        user : result.user
+                    }).then(result => {
+                        
+                        response.send({ 
+                            status: 'Request Sent',
+                            userHistory: result,
+                            UserDetails: userDetail
+                        })
+                    })
+                    
+                  
                 })
 
                 

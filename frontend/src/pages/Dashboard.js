@@ -25,7 +25,7 @@ const Dashboard = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
-    navigate("/");
+    // navigate("/");
   };
   // const handleShow = () => setShow(true);
 
@@ -71,7 +71,7 @@ const Dashboard = () => {
         })
         .then((result) => {
           dispatch(fetchCurrentUser({ ...result.data }));
-          // console.log(result);
+          console.log(result);
           // navigate("/history");
         });
     } catch (error) {

@@ -20,6 +20,7 @@ const History = () => {
   const state = useSelector((state) => state.users.users);
   console.log(state);
 
+  // const [phoneNumber, setPhoneNumber] = useState("");
   const [locationLatitude, setLocationLatitude] = useState("");
   const [locationLongitude, setLocationLongitude] = useState("");
 
@@ -29,7 +30,7 @@ const History = () => {
       setLocationLatitude(pos.coords.latitude);
       setLocationLongitude(pos.coords.longitude);
     });
-  }, [dispatch]);
+  }, [dispatch, locationLatitude]);
 
   useEffect(() => {
     axios
@@ -61,8 +62,9 @@ const History = () => {
   return (
     <div className="history-page-container">
       <div>
-        <p className=" text-black">{phoneNumber}</p>
+        <p className=" text-black">PHONE: {phoneNumber}</p>
         <span>
+          STATUS:
           {status.toLowerCase() === "waiting for a responder" ? (
             <img src={Waiting} alt="waiting icon" />
           ) : status.toLowerCase() === "responder on the way" ? (

@@ -153,88 +153,6 @@ router.post("/NewKondisyon", async (request, response) => {
 });
 
 //im safe button
-<<<<<<< backend/routes/usert.js
-router.post('/imSafe', async ( request, response ) => {
-    User.findOne({
-        phoneNumber: request.body.phoneNumber,
-    }).then (result => {
-
-        if (result === null ){
-            const newUser = new User ({
-                ...request.body,
-                    status: 'Safe now',
-                    statusDesc: 'Safe now',
-                    lastUpdate: Date.now()
-            });
-
-             //add new user
-             newUser.save().then( result => {
-                const userDetail = result;
-                
-                History.find({
-                    user : result._id
-                }).then(result => {
-                    
-                    response.send({ 
-                        status: 'Request Sent',
-                        userHistory: result,
-                        UserDetails: userDetail
-                    })
-                })
-            });
-        }else {
-            const userDetail = result;
-            // console.log(result.user)
-            //add to history first then update current users status and location
-            const newHistory = new History({
-                user: result._id,
-                locationLongitude: result.locationLongitude,
-                locationLatitude: result.locationLatitude,
-                dateUpdated: result.lastUpdate
-        
-            });
-            newHistory.save().then( result => {
-                
-                User.updateOne(
-         
-                    { phoneNumber: request.body.phoneNumber}, 
-                    { $set: { 
-                        locationLongitude: request.body.locationLongitude,
-                        locationLatitude: request.body.locationLatitude,
-                        status: 'Safe now',
-                        statusDesc: 'Safe now',
-                        lastUpdate: Date.now()
-                        
-                    } })
-                .then( result => {
-                    console.log(result)
-                    if( result.modifiedCount === 1 ){
-                        History.find({
-                            user : result._id
-                        }).then(result => {
-                            
-                            response.send({ 
-                                status: 'Request Sent',
-                                userHistory: result,
-                                userDetails: userDetail
-                            })
-                        })
-                        // response.send({ 
-                        //     status: "Request sent",
-                        //     result: result,
-                        //     userDetail : userDetail
-                        // });
-                    }
-                });
-
-            })
-           
-        
-               
-
-        }
-    })
-=======
 router.post("/imSafe", async (request, response) => {
   User.findOne({
     phoneNumber: request.body.phoneNumber,
@@ -249,11 +167,20 @@ router.post("/imSafe", async (request, response) => {
 
       //add new user
       newUser.save().then((result) => {
-        response.send({
-          status: "Request Sent",
+        const userDetail = result;
+
+        History.find({
+          user: result._id,
+        }).then((result) => {
+          response.send({
+            status: "Request Sent",
+            userHistory: result,
+            UserDetails: userDetail,
+          });
         });
       });
     } else {
+      const userDetail = result;
       // console.log(result.user)
       //add to history first then update current users status and location
       const newHistory = new History({
@@ -263,7 +190,6 @@ router.post("/imSafe", async (request, response) => {
         dateUpdated: result.lastUpdate,
       });
       newHistory.save().then((result) => {
-        console.log(result.user);
         User.updateOne(
           { phoneNumber: request.body.phoneNumber },
           {
@@ -276,14 +202,28 @@ router.post("/imSafe", async (request, response) => {
             },
           }
         ).then((result) => {
+          console.log(result);
           if (result.modifiedCount === 1) {
-            response.send({ status: "Request sent" });
+            History.find({
+              user: result._id,
+            }).then((result) => {
+              console.log(result);
+              response.send({
+                status: "Request Sent",
+                userHistory: result,
+                userDetails: userDetail,
+              });
+            });
+            // response.send({
+            //     status: "Request sent",
+            //     result: result,
+            //     userDetail : userDetail
+            // });
           }
         });
       });
     }
   });
->>>>>>> backend/routes/usert.js
 });
 
 // const newUser = new User(request.body);
@@ -294,4 +234,4 @@ router.post("/imSafe", async (request, response) => {
 //     });
 // });
 
-module.exports = router;
+module.exports = router;

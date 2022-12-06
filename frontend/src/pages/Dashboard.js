@@ -23,7 +23,10 @@ const Dashboard = () => {
 
   //Create popup modal after mark as safe
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    navigate("/");
+  };
   // const handleShow = () => setShow(true);
 
   // const [phoneNumber, setPhoneNumber] = useState("");
@@ -36,7 +39,7 @@ const Dashboard = () => {
       setLocationLatitude(pos.coords.latitude);
       setLocationLongitude(pos.coords.longitude);
     });
-  }, [dispatch]);
+  }, [dispatch, locationLatitude]);
 
   //On clik help button
   const onClickHelp = () => {
@@ -75,6 +78,7 @@ const Dashboard = () => {
       console.log(error);
     }
     setShow(true);
+    // localStorage.clear();
   };
 
   return (
@@ -120,13 +124,13 @@ const Dashboard = () => {
         <h2 className="text-center">STATUS LEGEND</h2>
         <ul className="list-unstyled text-center">
           <li>
-            <img src={Waiting} /> Waiting for a response
+            <img src={Waiting} alt="waiting icon" /> Waiting for a response
           </li>
           <li>
-            <img src={Ambulance} /> Responder on the way
+            <img src={Ambulance} alt="ambulance icon" /> Responder on the way
           </li>
           <li>
-            <img src={Safe} /> Safe now
+            <img src={Safe} alt="safe icon" /> Safe now
           </li>
         </ul>
       </div>

@@ -33,7 +33,7 @@ const Dashboard = () => {
       setLocationLatitude(pos.coords.latitude);
       setLocationLongitude(pos.coords.longitude);
     });
-  });
+  }, []);
 
   //On clik help button
   const onClickHelp = () => {

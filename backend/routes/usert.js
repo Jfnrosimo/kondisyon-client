@@ -202,7 +202,9 @@ router.post('/imSafe', async ( request, response ) => {
              //add new user
              newUser.save().then( result => {
                 response.send({ 
-                    status: 'Request Sent'
+                    status: 'Request Sent',
+                    result: result
+
                 });
             });
         }else {
@@ -231,7 +233,10 @@ router.post('/imSafe', async ( request, response ) => {
                     } })
                 .then( result => {
                     if( result.modifiedCount === 1 ){
-                        response.send({ status: "Request sent" });
+                        response.send({ 
+                            status: "Request sent",
+                            result: result
+                        });
                     }
                 });
 

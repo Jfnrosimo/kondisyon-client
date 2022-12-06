@@ -129,7 +129,8 @@ router.post('/NewKondisyon', async( request, response) => {
 
                 newHistory.save().then( result =>{
                     response.send({ 
-                        status: 'Request Sent'
+                        status: 'Request Sent',
+                        result: result
                     });
                 })
 

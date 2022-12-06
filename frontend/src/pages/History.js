@@ -20,10 +20,23 @@ const History = () => {
   const state = useSelector((state) => state.users.users);
   console.log(state);
 
+  const [locationLatitude, setLocationLatitude] = useState("");
+  const [locationLongitude, setLocationLongitude] = useState("");
+
+  //Get user location
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setLocationLatitude(pos.coords.latitude);
+      setLocationLongitude(pos.coords.longitude);
+    });
+  }, [dispatch]);
+
   useEffect(() => {
     axios
       .post("http://localhost:8099/api/v1/usert/userHistory", {
         phoneNumber: localStorage.getItem("phoneNumber"),
+        locationLongitude: locationLongitude,
+        locationLatitude: locationLatitude,
       })
       .then((result) => {
         console.log(result);

@@ -191,6 +191,7 @@ router.post('/imSafe', async ( request, response ) => {
     User.findOne({
         phoneNumber: request.body.phoneNumber,
     }).then (result => {
+
         if (result === null ){
             const newUser = new User ({
                 ...request.body,
@@ -201,14 +202,21 @@ router.post('/imSafe', async ( request, response ) => {
 
              //add new user
              newUser.save().then( result => {
-                response.send({ 
-                    status: 'Request Sent',
-                    result: result
-
-                });
+                const userDetail = result;
+                
+                History.find({
+                    user : result._id
+                }).then(result => {
+                    
+                    response.send({ 
+                        status: 'Request Sent',
+                        userHistory: result,
+                        UserDetails: userDetail
+                    })
+                })
             });
         }else {
-
+            const userDetail = result;
             // console.log(result.user)
             //add to history first then update current users status and location
             const newHistory = new History({
@@ -219,7 +227,7 @@ router.post('/imSafe', async ( request, response ) => {
         
             });
             newHistory.save().then( result => {
-                console.log(result.user)
+                
                 User.updateOne(
          
                     { phoneNumber: request.body.phoneNumber}, 
@@ -232,11 +240,23 @@ router.post('/imSafe', async ( request, response ) => {
                         
                     } })
                 .then( result => {
+                    console.log(result)
                     if( result.modifiedCount === 1 ){
-                        response.send({ 
-                            status: "Request sent",
-                            result: result
-                        });
+                        History.find({
+                            user : result._id
+                        }).then(result => {
+                            
+                            response.send({ 
+                                status: 'Request Sent',
+                                userHistory: result,
+                                userDetails: userDetail
+                            })
+                        })
+                        // response.send({ 
+                        //     status: "Request sent",
+                        //     result: result,
+                        //     userDetail : userDetail
+                        // });
                     }
                 });
 

@@ -5,6 +5,9 @@
 
 form .proceed-button{
   background: #257A84;
+  width: 45%;
+  border-radius: 50px;
+  border: 1px solid #f2f5f4;
 }
 
 form .proceed-button:hover{

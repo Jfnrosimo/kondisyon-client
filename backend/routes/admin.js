@@ -40,6 +40,18 @@ router.get('/userOntheWay',( request, response) => {
     })
 });
 
+//Get coordination of a specific user
+router.post('/coords', (request, response) => {
+    User.findOne({
+        phoneNumber: request.body.phoneNumber
+    }).then ( result => {
+        response.send({
+            longitude: result.locationLongitude,
+            latitude: result.locationLongitude
+        })
+    })
+})
+
 //Change status
 router.post('/changeStatus', ( request, response) => {
 

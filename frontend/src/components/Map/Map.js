@@ -2,13 +2,18 @@ import React, { useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Map.css";
 
-const Map = ({ longitude, latitude }) => {
-  console.log(`${longitude} ${latitude}`);
+const Map = () => {
+  
+  const position = [
+    localStorage.getItem("latitude"),
+    localStorage.getItem("longitude")
+  ]
+  console.log(position)
 
   return (
     <div>
       <MapContainer
-        center={[latitude, longitude]}
+        center={position}
         zoom={13}
         scrollWheelZoom={false}
       >
@@ -16,7 +21,7 @@ const Map = ({ longitude, latitude }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[latitude, longitude]}>
+        <Marker position={position}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>

@@ -130,7 +130,8 @@ const Dashboard = () => {
           <h2 className="text-center">STATUS LEGEND</h2>
           <ul className="list-unstyled text-center">
             <li>
-              <img src={Waiting} alt="waiting icon" /> Waiting for a response
+              <img className="waiting-icon" src={Waiting} alt="waiting icon" />{" "}
+              Waiting for a response
             </li>
             <li>
               <img src={Ambulance} alt="ambulance icon" /> Responder on the way

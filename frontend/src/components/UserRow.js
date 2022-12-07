@@ -102,8 +102,9 @@ const UserRow = ({
                               className="mb-3"
                               controlId="exampleForm.ControlInput1"
                             >
-                              <Form.Label>Email address</Form.Label>
+                              <Form.Label>Status</Form.Label>
                               <Form.Control
+                                className="text-black"
                                 type="text"
                                 placeholder="Enter status"
                                 onChange={(e) => setNewStatus(e.target.value)}
@@ -115,6 +116,7 @@ const UserRow = ({
                             >
                               <Form.Label>Status Description</Form.Label>
                               <Form.Control
+                                className="text-black"
                                 as="textarea"
                                 rows={3}
                                 onChange={(e) => setDescription(e.target.value)}

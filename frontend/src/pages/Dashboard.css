@@ -32,3 +32,7 @@ div .safe-btn:hover{
   background: rgb(4, 120, 18);
   color: #f2f2f2;
 }
+
+.waiting-icon{
+  width: 45px;
+}

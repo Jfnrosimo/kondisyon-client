@@ -4,8 +4,12 @@ import "./Map.css";
 
 const Map = () => {
   const position = [
-    localStorage.getItem("latitude"),
-    localStorage.getItem("longitude"),
+    localStorage.getItem("latitude")
+      ? localStorage.getItem("latitude")
+      : "16.416991669787116",
+    localStorage.getItem("longitude")
+      ? localStorage.getItem("longitude")
+      : "120.61336911978826",
   ];
   console.log(position);
 

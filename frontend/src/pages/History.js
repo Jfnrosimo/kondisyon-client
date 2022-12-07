@@ -75,14 +75,14 @@ const History = () => {
         <span className="statusspan">
           <h5 className="labelstatus">STATUS</h5>
           <br />
-          {status.toLowerCase() === "waiting for a responder" ? (
+          {userDetails.status.toLowerCase() === "waiting for a responder" ? (
             <img className="iconsstatus" src={Waiting} alt="waiting icon" />
-          ) : status.toLowerCase() === "responder on the way" ? (
+          ) : userDetails.status.toLowerCase() === "responder on the way" ? (
             <img className="iconsstatus" src={Ambulance} alt="ambulance logo" />
-          ) : status.toLowerCase() === "safe now" ? (
+          ) : userDetails.status.toLowerCase() === "safe now" ? (
             <img className="iconsstatus" src={Safe} alt="safe check logo" />
           ) : null}
-          <span className="statusupdate">{status}</span>
+          <span className="statusupdate">{userDetails.status}</span>
         </span>
         <p>{userDetails.statusDesc}</p>
       </div>

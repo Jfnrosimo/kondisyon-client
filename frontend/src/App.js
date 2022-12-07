@@ -17,7 +17,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/history" element={<History />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
     </div>
   );

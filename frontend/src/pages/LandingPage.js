@@ -7,7 +7,7 @@ import Logo from "../assets/kondisyon_final2.png";
 //Import redux
 import { fetchCurrentUser } from "../redux/reducers/usersSlice";
 
-//Import routing
+//Import routingqs
 import { useNavigate, Link } from "react-router-dom";
 
 //Import UI
@@ -73,17 +73,16 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="landing-page-container d-flex flex-column justify-content-center" >
-
+    <div className="landing-page-container d-flex flex-column justify-content-center">
       <div className="kondisyon-logo d-flex justify-content-center">
         <a href="./">
-        <img src={Logo} alt="logo" /> </a>
+          <img src={Logo} alt="logo" />{" "}
+        </a>
       </div>
       <p className="text-light text-top text-center mt-5">
         May we ask for you to calm down.
         <br />
-        We will definitely send help the
-        soonest.
+        We will definitely send help the soonest.
       </p>
       <Form
         onSubmit={onSubmitHandler}

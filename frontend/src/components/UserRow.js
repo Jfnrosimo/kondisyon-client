@@ -1,5 +1,7 @@
 //Import UI
 import { Button, Form, Modal } from "react-bootstrap";
+import { Table } from "reactstrap";
+import "./UserRow.css";
 
 //Import
 import { useEffect, useState } from "react";
@@ -11,7 +13,6 @@ import axios from "axios";
 //Import component
 import Map from "./Map/Map";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
 
 const UserRow = ({
   phoneNumber,
@@ -29,16 +30,12 @@ const UserRow = ({
   });
   console.log(needHelpUsers);
 
-
-
   //Set new value of user
   const [newStatus, setNewStatus] = useState("");
   const [description, setDescription] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
- 
 
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
@@ -58,115 +55,117 @@ const UserRow = ({
       axios
         .get("http://localhost:8099/api/v1/admin/getUser", {})
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           dispatch(fetchUsers(result.data));
         });
     } catch (error) {
       console.log(error);
     }
   }, [dispatch]);
-  
+
   return (
     <div>
       <h1>Admin Control System</h1>
-      {/* <Table> */}
-      <table>
-        <thead>
-          <tr>
-            <th>PHONE NUMBER</th>
-            <th>COORDINATE (Latitude, Longitude) </th>
-            <th>STATUS</th>
-            <th>ACTIONS</th>
-          </tr>
-        </thead>
-        <tbody>
-              {
-                needHelpUsers.map( user => {
-                  return (
-                  
-                  <tr>
-                    <td>{user.phoneNumber}</td>
-                    <td>
-                      {user.locationLatitude}, {user.locationLongitude}
-                    </td>
-                    <td>{user.status}</td>
-                    <td>
-                      <>
-                        <Button variant="primary" onClick={handleShow}>
-                          Respond to user
-                        </Button>
+      <div className="content-wrapper">
+        {/* <Table> */}
+        <Table>
+          <thead>
+            <tr>
+              <th>PHONE NUMBER</th>
+              <th>COORDINATE (Latitude, Longitude) </th>
+              <th>STATUS</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {needHelpUsers.map((user) => {
+              return (
+                <tr>
+                  <td>{user.phoneNumber}</td>
+                  <td>
+                    {user.locationLatitude}, {user.locationLongitude}
+                  </td>
+                  <td>{user.status}</td>
+                  <td>
+                    <>
+                      <Button variant="primary" onClick={handleShow}>
+                        Respond to user
+                      </Button>
 
-                        <Modal show={show} onHide={handleClose}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>Update the user status</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                            <Form>
-                              <Form.Group
-                                className="mb-3"
-                                controlId="exampleForm.ControlInput1"
-                              >
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control
-                                  type="text"
-                                  placeholder="Enter status"
-                                  onChange={(e) => setNewStatus(e.target.value)}
-                                />
-                              </Form.Group>
-                              <Form.Group
-                                className="mb-3"
-                                controlId="exampleForm.ControlTextarea1"
-                              >
-                                <Form.Label>Status Description</Form.Label>
-                                <Form.Control
-                                  as="textarea"
-                                  rows={3}
-                                  onChange={(e) => setDescription(e.target.value)}
-                                />
-                              </Form.Group>
-                            </Form>
-                          </Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                              Close
-                            </Button>
-                            <Button
-                              variant="primary"
-                              onClick={handleUpdateSubmit}
-                              type="submit"
+                      <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Update the user status</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <Form>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlInput1"
                             >
-                              Update Changes
-                            </Button>
-                          </Modal.Footer>
-                        </Modal>
-                        <Button
-                          className="mx-2"
-                            onClick={() => {
-                              localStorage.setItem("latitude",user.locationLatitude);
-                              localStorage.setItem('longitude',user.locationLongitude)
-                              window.location.reload()
-                            }}
-                        >
-                          View location
-                        </Button>
-                      </>
+                              <Form.Label>Email address</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter status"
+                                onChange={(e) => setNewStatus(e.target.value)}
+                              />
+                            </Form.Group>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlTextarea1"
+                            >
+                              <Form.Label>Status Description</Form.Label>
+                              <Form.Control
+                                as="textarea"
+                                rows={3}
+                                onChange={(e) => setDescription(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Close
+                          </Button>
+                          <Button
+                            variant="primary"
+                            onClick={handleUpdateSubmit}
+                            type="submit"
+                          >
+                            Update Changes
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                      <Button
+                        className="mx-2"
+                        onClick={() => {
+                          localStorage.setItem(
+                            "latitude",
+                            user.locationLatitude
+                          );
+                          localStorage.setItem(
+                            "longitude",
+                            user.locationLongitude
+                          );
+                          window.location.reload();
+                        }}
+                      >
+                        View location
+                      </Button>
+                    </>
                   </td>
                 </tr>
+              );
+            })}
+          </tbody>
+        </Table>
 
-                )})
-              }
-
-        </tbody>
-      </table>
-      
-        {/* Mapp */}
-      <div>
-              <Map />
+        {/* Map */}
+        <div>
+          <Map />
+        </div>
       </div>
-
     </div>
-    
-  )
+  );
 };
 
 export default UserRow;

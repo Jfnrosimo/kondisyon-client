@@ -8,21 +8,21 @@
 }
 
 form .proceed-button{
-  background: #257A84;
   width: 45%;
   border-radius: 50px;
-  border: 1px solid #f2f5f4;
+  border: 2px solid #f2f5f4;
 }
 
 form .proceed-button:hover{
-  border: 1px solid #257A84;
+  background: #257A84;
+  border: 2px solid #257A84;
 }
 
 
 @media screen and (max-width: 480px) {
-   .kondisyon-logo  {
+  .kondisyon-logo  {
     margin: 0;
-     transform: scale(0.55);
+    transform: scale(0.55);
     padding: 0;
   }
 }

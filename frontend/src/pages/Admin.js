@@ -6,23 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 //Import reducer
 import { fetchUsers } from "../redux/reducers/usersSlice";
 
-//Import UI
-import { Table } from "reactstrap";
-
 //Import pages
 import UserRow from "../components/UserRow";
 
-
-
 const Admin = () => {
-
-
- 
-
   return (
     <div>
-      
-      <UserRow/>
+      <UserRow />
     </div>
   );
 };

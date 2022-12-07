@@ -61,29 +61,33 @@ const History = () => {
 
   return (
     <div className="history-page-container">
-      <div>
-        <p className=" text-black">PHONE: {phoneNumber}</p>
-        <span>
-          STATUS:
+      <div className="phonenumstatus">
+        <div className="phonenumer">
+          <h5 className="labelphone">Phone Number</h5>
+          <p className=" text-black">{phoneNumber}</p>
+        </div>
+        <span className="statusspan">
+          <h5 className="labelstatus">STATUS</h5>
+          <br />
           {status.toLowerCase() === "waiting for a responder" ? (
-            <img src={Waiting} alt="waiting icon" />
+            <img className="iconsstatus" src={Waiting} alt="waiting icon" />
           ) : status.toLowerCase() === "responder on the way" ? (
-            <img src={Ambulance} alt="ambulance logo" />
+            <img className="iconsstatus" src={Ambulance} alt="ambulance logo" />
           ) : status.toLowerCase() === "safe now" ? (
-            <img src={Safe} alt="safe check logo" />
+            <img className="iconsstatus" src={Safe} alt="safe check logo" />
           ) : null}
-          {status}
+          <span className="statusupdate">{status}</span>
         </span>
         <p>{statusDesc}</p>
       </div>
-      <div>
+      <div className="tablerows">
         <h3 className="history-table-title text-light text-center">History</h3>
         <Table>
           <thead>
-            <tr>
+            <tr className="historylist">
               <th>Latitude</th>
               <th>Longitude</th>
-              <th>Date</th>
+              <th>Date & Time</th>
             </tr>
           </thead>
           <tbody>

@@ -1,5 +1,5 @@
 //Import hooks
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { fetchCurrentUser } from "../redux/reducers/usersSlice";
@@ -30,35 +30,41 @@ const History = () => {
       setLocationLatitude(pos.coords.latitude);
       setLocationLongitude(pos.coords.longitude);
     });
-  }, [dispatch, locationLatitude]);
+
+    console.log("helo");
+    // dispatch(fetchCurrentUser);
+  }, [dispatch]);
 
   useEffect(() => {
-    axios
-      .post("http://localhost:8099/api/v1/usert/userHistory", {
-        phoneNumber: localStorage.getItem("phoneNumber"),
-        locationLongitude: locationLongitude,
-        locationLatitude: locationLatitude,
-      })
-      .then((result) => {
-        console.log(result);
-        dispatch(fetchCurrentUser({ ...result.data }));
-      });
-  }, [dispatch]);
+    const getUserDetails = async () => {
+      const resp = await axios.post(
+        "http://localhost:8099/api/v1/usert/userHistory",
+        {
+          phoneNumber: localStorage.getItem("phoneNumber"),
+          locationLongitude: locationLongitude,
+          locationLatitude: locationLatitude,
+        }
+      );
+
+      localStorage.setItem(
+        "userDetails",
+        JSON.stringify(resp.data.userDetails)
+      );
+      localStorage.setItem(
+        "userHistory",
+        JSON.stringify(resp.data.userHistory)
+      );
+      console.log(resp);
+      dispatch(fetchCurrentUser({ ...resp.data }));
+    };
+    getUserDetails();
+  }, []);
 
   //Get current user details
   const phoneNumber = localStorage.getItem("phoneNumber");
-  const status = state.userDetails.status;
-  const statusDesc = state.userDetails.statusDesc;
-  const userHistory = state.userHistory;
-
-  // if (state.status === "Request sent") {
-  //   status = state.result.status;
-  //   statusDesc = state.userDetails.statusDesc;
-  //   userHistory = state.userHistory;
-  // } else {
-  //   status = state.user
-  // }
-
+  const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+  // const statusDesc = state.userDetails.statusDesc;
+  const userHistory = JSON.parse(localStorage.getItem("userHistory"));
   return (
     <div className="history-page-container">
       <div className="phonenumstatus">
@@ -78,7 +84,7 @@ const History = () => {
           ) : null}
           <span className="statusupdate">{status}</span>
         </span>
-        <p>{statusDesc}</p>
+        <p>{userDetails.statusDesc}</p>
       </div>
       <div className="tablerows">
         <h3 className="history-table-title text-light text-center">History</h3>

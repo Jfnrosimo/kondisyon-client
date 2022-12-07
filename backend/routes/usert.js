@@ -3,6 +3,7 @@ const router = express.Router();
 
 const User = require("../models/Users");
 const History = require("../models/History");
+const { route } = require("./user");
 
 //check phoneNUmber if exist
 router.post("/checkNumber", async (request, response) => {
@@ -80,6 +81,8 @@ router.post("/userHistory", (request, response) => {
     }
   });
 });
+
+
 
 //Register User
 router.post("/NewKondisyon", async (request, response) => {
@@ -234,12 +237,53 @@ router.post("/imSafe", async (request, response) => {
   });
 });
 
-// const newUser = new User(request.body);
 
-// newUser.save().then( result => {
-//     response.send({
-//         status: 'Kodinsyon sent'
-//     });
-// });
+//Update location of user
+router.post("/updateUserLocation", async(request, response) => {
+  //save to History first
+  User.findOne({
+    phoneNumber: request.body.phoneNumber,
+  }).then((result) =>{
+      const userId = result._id;
+      const longitude = result.locationLongitude;
+      const latitude = result.locationLatitude;
+      const lastUpdate = result.lastUpdate;
+      
+      const newHistory = new History({
+        user: userId,
+        locationLongitude: longitude,
+        locationLatitude: latitude,
+        dateUpdated: lastUpdate,
+      });
+
+      newHistory.save().then((result) => {
+        User.updateOne(
+          { phoneNumber: request.body.phoneNumber },
+          {
+            $set: {
+              locationLongitude: request.body.locationLongitude,
+              locationLatitude: request.body.locationLatitude,
+              lastUpdate: Date.now(),
+            },
+          }
+        ).then((result) => {
+          response.send({
+            result: result
+          })
+        })
+      })
+  })
+});
+
+
+//Get all history
+//Get all Users
+router.get('/getUser',( request, response) => {
+  History.find().then( result => {
+      response.send( result );
+  })
+});
+
+
 
 module.exports = router;

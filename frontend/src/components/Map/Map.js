@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Map.css";
 
 const Map = ({ longitude, latitude }) => {
-  console.log(`${longitude} ${latitude}`);
+  console.log(`${latitude} ${longitude}`);
 
   return (
     <div>

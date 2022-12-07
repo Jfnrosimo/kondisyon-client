@@ -1,38 +1,34 @@
-* {
-  background: #78B7B6;
-  
-}
 .dashboard-container{
   height: 100vh;
-  margin-top: 2rem;
+  background: #78B7B6;
+  padding-top: 100px;
+}
+
+.phone-number{
+  text-decoration: underline;
+  font-weight: 700;
 }
 
 .notify-container{
   background:#257A84;
 }
 
-div .help-btn {
+div .help-btn{
   background: rgba(203, 45, 45, 0.95);
 }
 
-div .help-btn:hover {
+div .help-btn:hover{
   background: rgb(239, 4, 4);
   
 }
-div .safe-btn {
+
+div .safe-btn{
   border: 2px solid green;
   background: #f2f2f2;
   color: green;
 }
 
-div .safe-btn:hover {
+div .safe-btn:hover{
   background: rgb(4, 120, 18);
   color: #f2f2f2;
 }
-
-/* @media screen and (max-width: 480px) {
-  .dashboard-container {
-    
-  }
-  
-} */

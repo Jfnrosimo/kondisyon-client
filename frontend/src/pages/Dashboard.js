@@ -83,58 +83,63 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      
-      <p className="text-center fs-5" phone-number>
-        Your phone number is: {localStorage.getItem("phoneNumber")}
-      </p>
-      <div className="d-flex flex-column align-items-center">
-        <h2 className="notify-container border border-solid border-white rounded text-center p-2 text-light w-75">
-          Notify Responders
-        </h2>
+      <div className="dashboard-content-wrapper">
+        <p className="text-center fs-5">
+          Your phone number is:{" "}
+          <span className="phone-number">
+            {localStorage.getItem("phoneNumber")}
+          </span>
+        </p>
+        <div className="d-flex flex-column align-items-center">
+          <h2 className="notify-container border border-solid border-white rounded text-center p-2 text-light w-75">
+            Notify Responders
+          </h2>
 
-        <p className=" text-center">Let us know about your situation.</p>
-        <div>
-          <Button
-            className="help-btn mx-3 p-3 text-light"
-            onClick={onClickHelp}
-          >
-            I need HELP
-          </Button>
-          <Button className="safe-btn mx-3 p-3" onClick={onClickSafe}>
-            I am SAFE
-          </Button>
-          {/*------------------ Popup modal ------------------*/}
-          <Modal show={show} onHide={handleClose} centered="true">
-            <Modal.Header closeButton>
-              <Modal.Title>Its good to hear from you</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <img className="w-10" src={Safe} /> You have marked yourself safe.
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              {/* <Button variant="primary" onClick={handleClose}>
+          <p className=" text-center">Let us know about your situation.</p>
+          <div>
+            <Button
+              className="help-btn mx-3 p-3 text-light"
+              onClick={onClickHelp}
+            >
+              I need HELP
+            </Button>
+            <Button className="safe-btn mx-3 p-3" onClick={onClickSafe}>
+              I am SAFE
+            </Button>
+            {/*------------------ Popup modal ------------------*/}
+            <Modal show={show} onHide={handleClose} centered="true">
+              <Modal.Header closeButton>
+                <Modal.Title>Its good to hear from you</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <img className="w-10" src={Safe} /> You have marked yourself
+                safe.
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                {/* <Button variant="primary" onClick={handleClose}>
                 Save Changes
               </Button> */}
-            </Modal.Footer>
-          </Modal>
+              </Modal.Footer>
+            </Modal>
+          </div>
         </div>
-      </div>
-      <div className="status-container mt-5">
-        <h2 className="text-center">STATUS LEGEND</h2>
-        <ul className="list-unstyled text-center">
-          <li>
-            <img src={Waiting} alt="waiting icon" /> Waiting for a response
-          </li>
-          <li>
-            <img src={Ambulance} alt="ambulance icon" /> Responder on the way
-          </li>
-          <li>
-            <img src={Safe} alt="safe icon" /> Safe now
-          </li>
-        </ul>
+        <div className="status-container mt-5">
+          <h2 className="text-center">STATUS LEGEND</h2>
+          <ul className="list-unstyled text-center">
+            <li>
+              <img src={Waiting} alt="waiting icon" /> Waiting for a response
+            </li>
+            <li>
+              <img src={Ambulance} alt="ambulance icon" /> Responder on the way
+            </li>
+            <li>
+              <img src={Safe} alt="safe icon" /> Safe now
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import History from "./pages/History";
 import Admin from "./pages/Admin";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 // import Map from "./components/Map/Map";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/history" element={<History />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
       </Routes>
     </div>
   );

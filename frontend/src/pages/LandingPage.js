@@ -80,7 +80,9 @@ const LandingPage = () => {
         <img src={Logo} alt="logo" /> </a>
       </div>
       <p className="text-light text-top text-center mt-5">
-        May we ask for you to calm down. We will definitely send help the
+        May we ask for you to calm down.
+        <br />
+        We will definitely send help the
         soonest.
       </p>
       <Form
@@ -113,7 +115,8 @@ const LandingPage = () => {
         </Button>
       </Form>
       <small className="text-center w-75 align-self-center">
-        By signing in you agree to our{" "}
+        By signing in you agree to {"Kondisyons'"}
+        <br />
         <Link to="/privacy-policy">Terms of Service and Privacy Policy.</Link>
       </small>
     </div>

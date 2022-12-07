@@ -4,7 +4,7 @@ import axios from "axios";
 export const usersSlice = createSlice({
   name: "users",
   initialState: {
-    users: [],
+    users: JSON.parse(localStorage.getItem("userHistory")) || [],
     errors: "",
   },
   reducers: {

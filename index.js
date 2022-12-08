@@ -21,11 +21,14 @@ const usertRoute = require("./routes/usert");
 const adminRoute = require("./routes/admin");
 
 // Database connection
-mongoose.connect(MONGO_URI);
-
-server.get("/", (request, response) => {
-  response.send(`Welcome to the Kondisyon api`);
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+
+// server.get("/", (request, response) => {
+//   response.send(`Welcome to the Kondisyon api`);
+// });
 
 //Routes
 server.use("/api/v1/user", userRoute);

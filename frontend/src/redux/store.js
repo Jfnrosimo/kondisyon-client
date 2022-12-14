@@ -8,6 +8,7 @@ const store = configureStore({
   reducer: {
     users: usersSlice,
   },
+  devTools: false
 });
 
 export default store;

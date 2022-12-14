@@ -10,7 +10,7 @@ export const usersSlice = createSlice({
   reducers: {
     newUser: (state, action) => {
       axios
-        .post("http://localhost:8099/api/V1/user/checkNumber", {
+        .post("https://kondisyon-api.onrender.com/api/V1/user/checkNumber", {
           ...action.payload.users,
         })
         .then((result) => {
@@ -22,7 +22,7 @@ export const usersSlice = createSlice({
     },
     updateUser: (state, action) => {
       axios
-        .post(`http://localhost:8099/api/v1/admin/changeStatus`, {
+        .post(`https://kondisyon-api.onrender.com/v1/admin/changeStatus`, {
           ...action.payload.users,
         })
         .then((result) => {
@@ -34,7 +34,7 @@ export const usersSlice = createSlice({
     },
     deleteUser: (state, action) => {
       axios
-        .put(`http://localhost:8080/api/v1/users/${action.payload.id}`, {
+        .put(`https://kondisyon-api.onrender.com/api/v1/users/${action.payload.id}`, {
           status: "deleted",
         })
         .then((result) => {

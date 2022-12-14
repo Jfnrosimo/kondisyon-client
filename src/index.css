@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Ultra&display=swap');
+
+*{
+  /* outline: 1px solid black; */
+}
+body *{
+  font-family: 'Poppins', sans-serif;
+}

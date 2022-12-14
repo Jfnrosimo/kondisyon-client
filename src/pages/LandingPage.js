@@ -46,7 +46,7 @@ const LandingPage = () => {
     }
     try {
       axios
-        .post("http://localhost:8099/api/V1/usert/checkNumber", {
+        .post("https://kondisyon-api.onrender.com/api/V1/usert/checkNumber", {
           phoneNumber: phoneNumber,
           locationLongitude: locationLongitude,
           locationLatitude: locationLatitude,

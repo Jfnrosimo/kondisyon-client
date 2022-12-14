@@ -45,7 +45,7 @@ const Dashboard = () => {
   const onClickHelp = () => {
     try {
       axios
-        .post("http://localhost:8099/api/v1/usert/NewKondisyon", {
+        .post("https://kondisyon-api.onrender.com/api/v1/usert/NewKondisyon", {
           phoneNumber: localStorage.getItem("phoneNumber"),
           locationLongitude: locationLongitude,
           locationLatitude: locationLatitude,
@@ -64,7 +64,7 @@ const Dashboard = () => {
   const onClickSafe = () => {
     try {
       axios
-        .post("http://localhost:8099/api/v1/usert/imSafe", {
+        .post("https://kondisyon-api.onrender.com/api/v1/usert/imSafe", {
           phoneNumber: localStorage.getItem("phoneNumber"),
           locationLongitude: locationLongitude,
           locationLatitude: locationLatitude,

@@ -38,7 +38,7 @@ const History = () => {
   useEffect(() => {
     const getUserDetails = async () => {
       const resp = await axios.post(
-        "http://localhost:8099/api/v1/usert/userHistory",
+        "https://kondisyon-api.onrender.com/api/v1/usert/userHistory",
         {
           phoneNumber: localStorage.getItem("phoneNumber"),
           locationLongitude: locationLongitude,

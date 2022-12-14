@@ -53,7 +53,7 @@ const UserRow = ({
   useEffect(() => {
     try {
       axios
-        .get("http://localhost:8099/api/v1/admin/getUser", {})
+        .get("https://kondisyon-api.onrender.com/api/v1/admin/getUser", {})
         .then((result) => {
           // console.log(result);
           dispatch(fetchUsers(result.data));

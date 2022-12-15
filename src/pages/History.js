@@ -1,5 +1,5 @@
 //Import hooks
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { fetchCurrentUser } from "../redux/reducers/usersSlice";
@@ -20,45 +20,8 @@ const History = () => {
   const state = useSelector((state) => state.users.users);
   console.log(state);
 
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  const [locationLatitude, setLocationLatitude] = useState("");
-  const [locationLongitude, setLocationLongitude] = useState("");
-
-  //Get user location
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      setLocationLatitude(pos.coords.latitude);
-      setLocationLongitude(pos.coords.longitude);
-    });
-
-    console.log("helo");
-    // dispatch(fetchCurrentUser);
-  }, [dispatch]);
-
-  useEffect(() => {
-    const getUserDetails = async () => {
-      const resp = await axios.post(
-        "https://kondisyon-api.onrender.com/api/v1/usert/userHistory",
-        {
-          phoneNumber: localStorage.getItem("phoneNumber"),
-          locationLongitude: locationLongitude,
-          locationLatitude: locationLatitude,
-        }
-      );
-
-      localStorage.setItem(
-        "userDetails",
-        JSON.stringify(resp.data.userDetails)
-      );
-      localStorage.setItem(
-        "userHistory",
-        JSON.stringify(resp.data.userHistory)
-      );
-      console.log(resp);
-      dispatch(fetchCurrentUser({ ...resp.data }));
-    };
-    getUserDetails();
-  }, []);
+  localStorage.setItem("userDetails", JSON.stringify(state.userDetails));
+  localStorage.setItem("userHistory", JSON.stringify(state.userHistory));
 
   //Get current user details
   const phoneNumber = localStorage.getItem("phoneNumber");

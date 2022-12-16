@@ -113,12 +113,12 @@ const LandingPage = () => {
           Proceed
         </Button>
       </Form>
-      <button onClick={() => navigate("/admin")}></button>
       <small className="text-center w-75 align-self-center">
         By signing in you agree to {"Kondisyons'"}
         <br />
         <Link to="/privacy-policy">Terms of Service and Privacy Policy.</Link>
       </small>
+      <Button variant="info" className="mt-3 mb-0" onClick={() => navigate("/admin")}>Responder's dashboard</Button>
     </div>
   );
 };

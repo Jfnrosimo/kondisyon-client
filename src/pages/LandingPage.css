@@ -33,6 +33,7 @@ form .proceed-button:hover{
     font-size: 0.8rem;
     background-color: #686868;
     color:rgb(75, 75, 75);
+    display: none;
   }
 }
 

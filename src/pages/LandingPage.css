@@ -25,6 +25,10 @@ form .proceed-button:hover{
     transform: scale(0.55);
     padding: 0;
   }
+  .resp-btn {
+    font-size: 0.8rem;
+    background-color: chartreuse;
+  }
 }
 
   /* .justify-content-center {

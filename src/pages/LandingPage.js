@@ -119,7 +119,7 @@ const LandingPage = () => {
         <br />
         <Link to="/privacy-policy">Terms of Service and Privacy Policy.</Link>
       </small>
-      <button className="mt-4 mb-0 bg-sucess w-25 m-auto" onClick={() => navigate("/admin")}><small>Responder's dashboard </small><BsArrowRight /></button>
+      <button className="resp-btn mt-4 mb-0 bg-sucess w-25 m-auto" onClick={() => navigate("/admin")}><small>Responder's dashboard </small><BsArrowRight /></button>
     </div>
   );
 };

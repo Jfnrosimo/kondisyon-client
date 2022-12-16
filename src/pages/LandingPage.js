@@ -113,6 +113,7 @@ const LandingPage = () => {
           Proceed
         </Button>
       </Form>
+      <button onClick={() => navigate("/admin")}></button>
       <small className="text-center w-75 align-self-center">
         By signing in you agree to {"Kondisyons'"}
         <br />

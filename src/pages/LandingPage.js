@@ -23,6 +23,7 @@ import {
 } from "reactstrap";
 import "./LandingPage.css";
 import { FaPhoneAlt } from "react-icons/fa";
+import {BsArrowRight} from "react-icons/bs"
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -118,7 +119,7 @@ const LandingPage = () => {
         <br />
         <Link to="/privacy-policy">Terms of Service and Privacy Policy.</Link>
       </small>
-      <Button className="mt-3 mb-0 bg-info w-25" onClick={() => navigate("/admin")}>Responder's dashboard</Button>
+      <Button className="mt-4 mb-0 bg-sucess w-25" onClick={() => navigate("/admin")}><small>Responder's dashboard </small><BsArrowRight /></Button>
     </div>
   );
 };

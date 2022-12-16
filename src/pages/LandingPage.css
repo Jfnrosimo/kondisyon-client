@@ -18,6 +18,10 @@ form .proceed-button:hover{
   border: 2px solid #257A84;
 }
 
+.resp-btn {
+  background-color: #7DFDA3;
+}
+
 
 @media screen and (max-width: 480px) {
   .kondisyon-logo  {
@@ -27,7 +31,8 @@ form .proceed-button:hover{
   }
   .resp-btn {
     font-size: 0.8rem;
-    background-color: chartreuse;
+    background-color: #686868;
+    color:rgb(75, 75, 75);
   }
 }
 
